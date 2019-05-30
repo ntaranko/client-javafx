@@ -1,0 +1,12 @@
+{
+  "meta-data" : {
+    "command-name": "login"
+  },
+
+  "data" : {
+    "user" : "admin",
+    "password" : "123"
+  }
+}
+
+

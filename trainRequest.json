@@ -1,0 +1,13 @@
+{
+  "meta-data" : {
+    "command-name": "trainRequest"
+  },
+
+  "data" : {
+    "requestDispatchStation" : "Брест",
+    "requestArrivalStation" : "Барановичи",
+    "requestDispatchDate" : "2019-05-29",
+    "requestDispatchTime" : "13:55",
+    "requestNumberTickets" : 2
+  }
+}

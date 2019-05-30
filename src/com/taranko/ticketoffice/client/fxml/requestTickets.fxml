@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taranko.ticketoffice.client.controllers.RequestTicketsController">
+    <children>
+        <AnchorPane layoutY="75.0" prefHeight="526.0" prefWidth="1000.0">
+            <children>
+                <Label layoutX="112.0" layoutY="43.0" prefHeight="28.0" prefWidth="143.0" text="Enter Route">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="27.0" layoutY="121.0" text="Dispatch Station">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="27.0" layoutY="196.0" text="Arrival Station">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <ComboBox fx:id="dispatchStationSelector" layoutX="163.0" layoutY="119.0" prefHeight="25.0" prefWidth="205.0" promptText="Select Dispatch Station" />
+
+                <ComboBox fx:id="arrivalStationSelector" layoutX="165.0" layoutY="193.0" prefHeight="25.0" prefWidth="205.0" promptText="Select Arrival Station" />
+                <Label layoutX="25.0" layoutY="264.0" text="Dispatch Date">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="dispatchDateSelector" editable="false" layoutX="163.0" layoutY="261.0" prefHeight="25.0" prefWidth="205.0" promptText="Select Dispatch Date" />
+                <Label layoutX="27.0" layoutY="320.0" text="Dispatch Time">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="25.0" layoutY="378.0" text="Number of tickets">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Button fx:id="searchBtn" layoutX="742.0" layoutY="398.0" mnemonicParsing="false" text="Search">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="hoursTime" layoutX="165.0" layoutY="318.0" prefHeight="25.0" prefWidth="36.0" promptText="HH" />
+                <TextField fx:id="minutesTime" layoutX="217.0" layoutY="318.0" prefHeight="25.0" prefWidth="36.0" promptText="MM" />
+                <ComboBox fx:id="numberOfTicketsSelector" layoutX="165.0" layoutY="376.0" prefHeight="25.0" prefWidth="205.0" promptText="Select number of Tickets" />
+            <Label layoutX="208.0" layoutY="322.0" text=":">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+        <Label layoutX="387.0" layoutY="29.0" text="Train Tickets Booking">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="694.0" layoutY="19.0" prefHeight="20.0" prefWidth="82.0" text="Authorized:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Hyperlink layoutX="766.0" layoutY="15.0" prefHeight="28.0" prefWidth="217.0" text="First Name Last Name">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Hyperlink>
+    </children>
+</AnchorPane>
