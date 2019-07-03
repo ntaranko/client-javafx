@@ -13,13 +13,13 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.function.Consumer;
 
-public class SendTicketsRequest {
+public class TicketsRequest {
 
-    public void sendTicketRequest(String requestDispatchStation,
-                                  String requestArrivalStation,
-                                  Date requestDispatchDate,
-                                  Date requestDispatchTime,
-                                  int requestNumberTickets) throws IOException {
+    public JSONObject send(String requestDispatchStation,
+                           String requestArrivalStation,
+                           Date requestDispatchDate,
+                           Date requestDispatchTime,
+                           int requestNumberTickets) throws IOException {
 
         Properties programSettings = new Properties();
         BufferedReader propertiesReader = new BufferedReader(new FileReader("settings.properties"));
@@ -53,7 +53,7 @@ public class SendTicketsRequest {
 
         JSONObject serverJson = (JSONObject) tokener.nextValue();
 
-        JSONObject responseData = serverJson.getJSONObject("response-data");
+        /*JSONObject responseData = serverJson.getJSONObject("response-data");
         Integer responseCode = responseData.getInt("response-code");
         JSONObject response = serverJson.getJSONObject("response");
 
@@ -84,9 +84,11 @@ public class SendTicketsRequest {
                 }
             });
 
-        }
+        }*/
 
         osWriter.close();
         serverResponse.close();
+
+        return serverJson;
     }
 }

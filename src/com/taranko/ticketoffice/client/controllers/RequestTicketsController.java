@@ -1,12 +1,13 @@
 package com.taranko.ticketoffice.client.controllers;
 
-import com.taranko.ticketoffice.client.requesttickets.SendTicketsRequest;
+import com.taranko.ticketoffice.client.requesttickets.TicketsRequest;
 import com.taranko.ticketoffice.client.utils.DateUtils;
 import com.taranko.ticketoffice.client.utils.NumbersOfTicketsList;
 import com.taranko.ticketoffice.client.utils.StationList;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -69,7 +70,7 @@ public class RequestTicketsController {
             String dispatchTimeSting = hours.toString() + ":" + minutes.toString();
             Date dispatchTime = null;
             try {
-                 dispatchTime = du.buildTimeFromString(dispatchTimeSting);
+                dispatchTime = du.buildTimeFromString(dispatchTimeSting);
             } catch (ParseException e) {
                 Alert loginWarning = new Alert(Alert.AlertType.ERROR);
                 loginWarning.setHeaderText("Validation");
@@ -86,6 +87,8 @@ public class RequestTicketsController {
 
             int numberOfTickets = numberOfTicketsSelector.getValue();
 
+            JSONObject serverJson = new JSONObject();
+
             if (!correctTicketsRequest(dispatchStation, arrivalStation, dispatchDate, hours, minutes)) { //добавить проверки: на непустые значения, на нетекстовые значения в полях времени
                 Alert loginWarning = new Alert(Alert.AlertType.ERROR);
                 loginWarning.setHeaderText("Validation");
@@ -99,18 +102,50 @@ public class RequestTicketsController {
                     }
                 });
             } else {
-                SendTicketsRequest sendTicketsRequest = new SendTicketsRequest();
-
+                TicketsRequest ticketsRequest = new TicketsRequest();
                 try {
-                    sendTicketsRequest.sendTicketRequest(dispatchStation, arrivalStation, dispatchDate, dispatchTime, numberOfTickets);
+                    serverJson = ticketsRequest.send(dispatchStation, arrivalStation, dispatchDate, dispatchTime, numberOfTickets);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
-            System.out.println(hours + minutes);
+            JSONObject responseData = serverJson.getJSONObject("response-data");
+            Integer responseCode = responseData.getInt("response-code");
+            JSONObject response = serverJson.getJSONObject("response");
+
+            if (responseCode == 405) {
+                Alert loginWarning = new Alert(Alert.AlertType.ERROR);
+                loginWarning.setHeaderText("Tickets Request");
+                loginWarning.setContentText("No available tickets! Change search criteria and try again!");
+                loginWarning.showAndWait().ifPresent(new Consumer<ButtonType>() {
+                    @Override
+                    public void accept(ButtonType buttonType) {
+                        if (buttonType == ButtonType.OK) {
+                            loginWarning.hide();
+                        }
+                    }
+                });
+
+            } else {
+                Alert loginWarning = new Alert(Alert.AlertType.INFORMATION);
+                loginWarning.setContentText("Tickets are available");
+                loginWarning.showAndWait().ifPresent(new Consumer<ButtonType>() {
+                    @Override
+                    public void accept(ButtonType buttonType) {
+                        if (buttonType == ButtonType.OK) {
+                            loginWarning.hide();
+
+
+
+                        }
+                    }
+                });
+
+            }
+          /*  System.out.println(hours + minutes);
             System.out.println(dispatchStation + arrivalStation);
-            System.out.println(dispatchDate.toString());
+            System.out.println(dispatchDate.toString());*/
 
 
         });

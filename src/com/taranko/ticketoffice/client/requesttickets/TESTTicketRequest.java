@@ -4,7 +4,7 @@ import com.taranko.ticketoffice.client.utils.Stations;
 
 import java.util.Date;
 
-public class TicketRequest {
+public class TESTTicketRequest {
     private Stations requestDispatchStation;
     private String requestArrivalStation;
     private Date requestDispatchDate;
